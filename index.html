@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>يوم الإسعاف العالمي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      text-align: center;
+      direction: rtl;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    video {
+      width: 100%;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .question {
+      margin: 15px 0 5px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+    }
+    .options label {
+      display: block;
+      margin: 8px 0;
+      padding: 8px;
+      background: #e6f2ff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: right;
+    }
+    .options label:hover {
+      background: #cce6ff;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #0077cc;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>📌 يوم الإسعاف العالمي</h1>
+    
+    <!-- صورة في الأعلى -->
+    <img src="2.jpg" alt="يوم الإسعاف العالمي">
+
+    <!-- الفيديو الأول -->
+    <video controls>
+      <source src="video1.mp4" type="video/mp4">
+    </video>
+
+    <div class="question">1️⃣ لماذا تستخدم إبرة الحساسية؟</div>
+    <div class="options">
+      <label><input type="radio" name="q1" value="0"> نزلات البرد</label>
+      <label><input type="radio" name="q1" value="1"> حالات حساسية الدواء والطعام</label>
+      <label><input type="radio" name="q1" value="0"> لعلاج الجروح</label>
+    </div>
+
+    <div class="question">2️⃣ ما أهمية لزيق الجروح (الشريط اللاصق)؟</div>
+    <div class="options">
+      <label><input type="radio" name="q2" value="0"> للزينة فقط</label>
+      <label><input type="radio" name="q2" value="1"> لإغلاق الجروح وحمايتها</label>
+      <label><input type="radio" name="q2" value="0"> لتغطية العين</label>
+    </div>
+
+    <!-- الفيديو الثاني -->
+    <video controls>
+      <source src="video2.mp4" type="video/mp4">
+    </video>
+
+    <div class="question">3️⃣ أول خطوة عند معالجة جرح صغير؟</div>
+    <div class="options">
+      <label><input type="radio" name="q3" value="1"> غسل اليدين جيداً</label>
+      <label><input type="radio" name="q3" value="0"> وضع تراب على الجرح</label>
+      <label><input type="radio" name="q3" value="0"> تركه ينزف</label>
+    </div>
+
+    <div class="question">4️⃣ بعد تنظيف الجرح ماذا نفعل؟</div>
+    <div class="options">
+      <label><input type="radio" name="q4" value="1"> نغطيه بضماد نظيف</label>
+      <label><input type="radio" name="q4" value="0"> نتركه مكشوف</label>
+      <label><input type="radio" name="q4" value="0"> نغسله بالمعطر</label>
+    </div>
+
+    <!-- الفيديو الثالث -->
+    <video controls>
+      <source src="video3.mp4" type="video/mp4">
+    </video>
+
+    <div class="question">5️⃣ ماذا نفعل أولاً عند حدوث حرق بسيط؟</div>
+    <div class="options">
+      <label><input type="radio" name="q5" value="1"> تبريده بالماء الجاري</label>
+      <label><input type="radio" name="q5" value="0"> وضع معجون أسنان</label>
+      <label><input type="radio" name="q5" value="0"> تغطيته مباشرة بقطعة قماش</label>
+    </div>
+
+    <div class="question">6️⃣ ماذا يجب تجنب فعله مع الحروق؟</div>
+    <div class="options">
+      <label><input type="radio" name="q6" value="1"> نزع الملابس الملتصقة</label>
+      <label><input type="radio" name="q6" value="0"> تبريد المكان</label>
+      <label><input type="radio" name="q6" value="0"> تغطيته بضماد نظيف</label>
+    </div>
+
+    <button onclick="checkAnswers()">إظهار النتيجة</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      let score = 0;
+      let total = 6;
+      for (let i = 1; i <= total; i++) {
+        let selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === "1") {
+          score++;
+        }
+      }
+      let message = "";
+      if (score === total) {
+        message = "👏 ممتاز! أجبت على جميع الأسئلة بشكل صحيح.";
+      } else if (score >= 4) {
+        message = "👍 أحسنت! نتيجتك جيدة.";
+      } else {
+        message = "🙂 حاول مرة أخرى لتتعلم أكثر.";
+      }
+      document.getElementById("result").innerHTML =
+        `نتيجتك: ${score} من ${total} <br> ${message}`;
+    }
+  </script>
+
+</body>
+</html>
