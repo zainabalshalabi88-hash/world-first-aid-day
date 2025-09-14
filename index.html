@@ -2,6 +2,7 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>يوم الإسعاف العالمي</title>
   <style>
     body {
@@ -9,31 +10,59 @@
       background: #f0f8ff;
       text-align: center;
       direction: rtl;
+      margin: 0;
+      padding: 0;
     }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px auto;
+      max-width: 980px;
+      padding: 0 10px;
+      text-align: center;
+    }
+    .header .right-text,
+    .header .left-text {
+      font-size: 18px;
+      color: #004080;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+    .header .right-text { text-align: right; }
+    .header .left-text { text-align: left; direction: ltr; }
+    .header .logo img {
+      width: auto;
+      max-height: 70px;
+      display: block;
+      margin: 0 12px;
+    }
+
     .container {
       max-width: 800px;
-      margin: auto;
+      margin: 10px auto 40px;
       padding: 20px;
       background: #fff;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-    img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
+
     video {
       width: 100%;
       border-radius: 12px;
       margin: 20px 0;
+      display: block;
     }
+
     .question {
       margin: 15px 0 5px;
       font-size: 18px;
       font-weight: bold;
       text-align: right;
+      clear: both;
     }
+
     .options label {
       display: block;
       margin: 8px 0;
@@ -41,14 +70,18 @@
       background: #e6f2ff;
       border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.15s;
       text-align: right;
     }
-    .options label:hover {
-      background: #cce6ff;
-    }
-    button {
+    .options label:hover { background: #cce6ff; }
+
+    .nav-buttons {
       margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
       padding: 12px 25px;
       font-size: 16px;
       border: none;
@@ -57,105 +90,188 @@
       color: white;
       cursor: pointer;
     }
-    button:hover {
-      background: #005fa3;
-    }
-    #result {
+    button:hover { background: #005fa3; }
+
+    .page { display: none; }
+    .active { display: block; }
+
+    #result img {
+      max-width: 300px;
       margin-top: 20px;
-      font-size: 20px;
-      font-weight: bold;
+    }
+
+    .result-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    @media (max-width:640px) {
+      .header { flex-direction: column; gap: 10px; }
+      .header .right-text, .header .left-text { font-size: 16px; }
+      .header .logo img { max-height: 60px; }
+      .container { margin: 8px; padding: 14px; }
+      .nav-buttons { flex-direction: column; gap: 10px; }
+      .result-buttons { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>📌 يوم الإسعاف العالمي</h1>
-    
-    <!-- صورة في الأعلى -->
-    <img src="2.jpg" alt="يوم الإسعاف العالمي">
+  <!-- الهيدر -->
+  <div class="header">
+    <div class="right-text">
+      <div>هيئة الشارقة للتعليم الخاص</div>
+      <div>مدرسة الاستقلال الخاصة</div>
+    </div>
+    <div class="logo">
+      <img src="1.jpg" alt="شعار المدرسة">
+    </div>
+    <div class="left-text">
+      <div>Sharjah Private Education Authority</div>
+      <div>Alestiqlal Private School</div>
+    </div>
+  </div>
 
-    <!-- الفيديو الأول -->
+  <!-- الصفحة 1 -->
+  <div class="container page active" id="page1">
+    <h1>📌 يوم الإسعاف العالمي</h1>
     <video controls>
       <source src="video1.mp4" type="video/mp4">
     </video>
-
     <div class="question">1️⃣ لماذا تستخدم إبرة الحساسية؟</div>
     <div class="options">
       <label><input type="radio" name="q1" value="0"> نزلات البرد</label>
       <label><input type="radio" name="q1" value="1"> حالات حساسية الدواء والطعام</label>
       <label><input type="radio" name="q1" value="0"> لعلاج الجروح</label>
     </div>
-
     <div class="question">2️⃣ ما أهمية لزيق الجروح (الشريط اللاصق)؟</div>
     <div class="options">
       <label><input type="radio" name="q2" value="0"> للزينة فقط</label>
       <label><input type="radio" name="q2" value="1"> لإغلاق الجروح وحمايتها</label>
       <label><input type="radio" name="q2" value="0"> لتغطية العين</label>
     </div>
+    <div class="nav-buttons">
+      <div></div>
+      <button onclick="nextPage(2)">التالي ⬅️</button>
+    </div>
+  </div>
 
-    <!-- الفيديو الثاني -->
+  <!-- الصفحة 2 -->
+  <div class="container page" id="page2">
     <video controls>
       <source src="video2.mp4" type="video/mp4">
     </video>
-
     <div class="question">3️⃣ أول خطوة عند معالجة جرح صغير؟</div>
     <div class="options">
       <label><input type="radio" name="q3" value="1"> غسل اليدين جيداً</label>
       <label><input type="radio" name="q3" value="0"> وضع تراب على الجرح</label>
       <label><input type="radio" name="q3" value="0"> تركه ينزف</label>
     </div>
-
     <div class="question">4️⃣ بعد تنظيف الجرح ماذا نفعل؟</div>
     <div class="options">
       <label><input type="radio" name="q4" value="1"> نغطيه بضماد نظيف</label>
       <label><input type="radio" name="q4" value="0"> نتركه مكشوف</label>
       <label><input type="radio" name="q4" value="0"> نغسله بالمعطر</label>
     </div>
+    <div class="nav-buttons">
+      <button onclick="prevPage(1)">➡️ السابق</button>
+      <button onclick="nextPage(3)">التالي ⬅️</button>
+    </div>
+  </div>
 
-    <!-- الفيديو الثالث -->
+  <!-- الصفحة 3 -->
+  <div class="container page" id="page3">
     <video controls>
       <source src="video3.mp4" type="video/mp4">
     </video>
-
     <div class="question">5️⃣ ماذا نفعل أولاً عند حدوث حرق بسيط؟</div>
     <div class="options">
       <label><input type="radio" name="q5" value="1"> تبريده بالماء الجاري</label>
       <label><input type="radio" name="q5" value="0"> وضع معجون أسنان</label>
       <label><input type="radio" name="q5" value="0"> تغطيته مباشرة بقطعة قماش</label>
     </div>
-
     <div class="question">6️⃣ ماذا يجب تجنب فعله مع الحروق؟</div>
     <div class="options">
       <label><input type="radio" name="q6" value="1"> نزع الملابس الملتصقة</label>
       <label><input type="radio" name="q6" value="0"> تبريد المكان</label>
       <label><input type="radio" name="q6" value="0"> تغطيته بضماد نظيف</label>
     </div>
+    <div class="nav-buttons">
+      <button onclick="prevPage(2)">➡️ السابق</button>
+      <button onclick="checkAnswers()">إظهار النتيجة ✅</button>
+    </div>
+  </div>
 
-    <button onclick="checkAnswers()">إظهار النتيجة</button>
+  <!-- صفحة النتيجة -->
+  <div class="container page" id="resultPage">
     <div id="result"></div>
+    <div class="result-buttons">
+      <button id="retryBtn" onclick="restart()">🔄 إعادة التجربة</button>
+      <button onclick="goHome()">🏠 العودة للرئيسية</button>
+    </div>
   </div>
 
   <script>
+    function showPage(id) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+
+      // إيقاف كل الفيديوهات
+      document.querySelectorAll("video").forEach(v => {
+        v.pause();
+        v.currentTime = 0;
+      });
+
+      document.getElementById("page" + id).classList.add("active");
+    }
+
+    function nextPage(pageNumber) {
+      showPage(pageNumber);
+    }
+
+    function prevPage(pageNumber) {
+      showPage(pageNumber);
+    }
+
     function checkAnswers() {
       let score = 0;
       let total = 6;
       for (let i = 1; i <= total; i++) {
         let selected = document.querySelector(`input[name="q${i}"]:checked`);
-        if (selected && selected.value === "1") {
-          score++;
-        }
+        if (selected && selected.value === "1") score++;
       }
-      let message = "";
-      if (score === total) {
-        message = "👏 ممتاز! أجبت على جميع الأسئلة بشكل صحيح.";
-      } else if (score >= 4) {
-        message = "👍 أحسنت! نتيجتك جيدة.";
+
+      document.querySelectorAll("video").forEach(v => {
+        v.pause();
+        v.currentTime = 0;
+      });
+
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById("resultPage").classList.add("active");
+
+      if (score >= 4) {
+        document.getElementById("result").innerHTML = 
+          `<p>👏 أحسنت! نتيجتك ${score} من ${total}</p>
+           <img src="2.jpg" alt="أحسنت يا بطل الإنقاذ">`;
+        document.getElementById("retryBtn").style.display = "none";
       } else {
-        message = "🙂 حاول مرة أخرى لتتعلم أكثر.";
+        document.getElementById("result").innerHTML = 
+          `<p>🙂 نتيجتك ${score} من ${total}. حاول مرة أخرى</p>
+           <img src="3.jpg" alt="لنعيد التجربة مرة أخرى">`;
+        document.getElementById("retryBtn").style.display = "inline-block";
       }
-      document.getElementById("result").innerHTML =
-        `نتيجتك: ${score} من ${total} <br> ${message}`;
+    }
+
+    function restart() {
+      document.querySelectorAll("input[type=radio]").forEach(el => el.checked = false);
+      showPage(1);
+    }
+
+    function goHome() {
+      // مسح كل الاختيارات وإعادة من البداية
+      document.querySelectorAll("input[type=radio]").forEach(el => el.checked = false);
+      showPage(1);
     }
   </script>
 
